@@ -12,7 +12,7 @@ from auto_anime_dl.config import (
 )
 from auto_anime_dl.utils import read_json
 from auto_anime_dl.scheduler import run_scheduler, run_once
-from auto_anime_dl.state import load_processed_infohashes
+from auto_anime_dl.state import load_processed_keys
 from auto_anime_dl.config import STATE_PATH, SCHEDULE_INTERVAL_SECONDS
 import asyncio
 import logging
@@ -56,7 +56,7 @@ async def _startup_background_tasks():
 
 @app.get("/api/scheduler/status")
 def scheduler_status():
-    processed = load_processed_infohashes(STATE_PATH)
+    processed = load_processed_keys(STATE_PATH)
     return JSONResponse(content={
         "interval_seconds": SCHEDULE_INTERVAL_SECONDS,
         "processed_count": len(processed),
